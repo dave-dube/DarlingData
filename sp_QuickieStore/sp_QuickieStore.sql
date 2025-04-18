@@ -6389,7 +6389,7 @@ FROM
         Both are very wrong, so we need this.
         */
         partitioned_last_execution_time =
-            LAST_VALUE(qsrs.last_execution_time) OVER
+            FIRST_VALUE(qsrs.last_execution_time) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
@@ -6399,7 +6399,7 @@ FROM
                 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
             ),
         partitioned_last_duration =
-            LAST_VALUE(qsrs.last_duration) OVER
+            FIRST_VALUE(qsrs.last_duration) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
@@ -6409,7 +6409,7 @@ FROM
                 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
             ),
         partitioned_last_cpu_time =
-            LAST_VALUE(qsrs.last_cpu_time) OVER
+            FIRST_VALUE(qsrs.last_cpu_time) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
@@ -6419,7 +6419,7 @@ FROM
                 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
             ),
         partitioned_last_logical_io_reads =
-            LAST_VALUE(qsrs.last_logical_io_reads) OVER
+            FIRST_VALUE(qsrs.last_logical_io_reads) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
@@ -6429,7 +6429,7 @@ FROM
                 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
             ),
         partitioned_last_logical_io_writes =
-            LAST_VALUE(qsrs.last_logical_io_writes) OVER
+            FIRST_VALUE(qsrs.last_logical_io_writes) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
@@ -6439,7 +6439,7 @@ FROM
                 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
             ),
         partitioned_last_physical_io_reads =
-            LAST_VALUE(qsrs.last_physical_io_reads) OVER
+            FIRST_VALUE(qsrs.last_physical_io_reads) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
@@ -6449,7 +6449,7 @@ FROM
                 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
             ),
         partitioned_last_clr_time =
-            LAST_VALUE(qsrs.last_clr_time) OVER
+            FIRST_VALUE(qsrs.last_clr_time) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
@@ -6459,7 +6459,7 @@ FROM
                 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
             ),
         partitioned_last_dop =
-            LAST_VALUE(qsrs.last_dop) OVER
+            FIRST_VALUE(qsrs.last_dop) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
@@ -6469,7 +6469,7 @@ FROM
                 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
             ),
         partitioned_last_query_max_used_memory =
-            LAST_VALUE(qsrs.last_query_max_used_memory) OVER
+            FIRST_VALUE(qsrs.last_query_max_used_memory) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
@@ -6479,7 +6479,7 @@ FROM
                 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
             ),
         partitioned_last_rowcount =
-            LAST_VALUE(qsrs.last_rowcount) OVER
+            FIRST_VALUE(qsrs.last_rowcount) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
@@ -6494,7 +6494,7 @@ BEGIN
     SELECT
         @sql += N'
         partitioned_last_num_physical_io_reads =
-            LAST_VALUE(qsrs.last_num_physical_io_reads) OVER
+            FIRST_VALUE(qsrs.last_num_physical_io_reads) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
@@ -6504,7 +6504,7 @@ BEGIN
                 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
             ),
         partitioned_last_log_bytes_used =
-            LAST_VALUE(qsrs.last_log_bytes_used) OVER
+            FIRST_VALUE(qsrs.last_log_bytes_used) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
@@ -6514,7 +6514,7 @@ BEGIN
                 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
             ),
         partitioned_last_tempdb_space_used =
-            LAST_VALUE(qsrs.last_tempdb_space_used) OVER
+            FIRST_VALUE(qsrs.last_tempdb_space_used) OVER
             (
                 PARTITION BY
                     qsrs.plan_id,
